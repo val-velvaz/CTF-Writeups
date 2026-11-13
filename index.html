@@ -31,7 +31,12 @@
   </header>
 
   <!-- Los filtros y las tarjetas se generan desde writeups/index.json -->
+  <div class="search">
+    <label class="visually-hidden" for="search">Buscar writeups por nombre</label>
+    <input id="search" class="search__input" type="search" placeholder="🔍 buscar por nombre o etiqueta…" autocomplete="off" spellcheck="false">
+  </div>
   <nav class="filters" id="filters" aria-label="Filtrar writeups"></nav>
+  <p class="empty" id="no-results" hidden>Ningún writeup coincide con la búsqueda.</p>
   <main class="grid" id="grid" aria-live="polite">
     <p class="empty">Cargando…</p>
   </main>
