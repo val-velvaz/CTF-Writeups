@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Seguridad: todo por HTTPS, sin scripts externos ni inline -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%9A%A9%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&amp;family=Fira+Code:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<script src="assets/js/theme.js"></script>
+<title>Writeups · v4l3r14</title>
+<meta name="description" content="Writeups de ciberseguridad: máquinas, retos y labs paso a paso.">
+<script type="module" src="assets/js/home.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#grid">Saltar a los writeups</a>
+<div class="wrap">
+  <header class="site-header">
+    <div class="topbar">
+      <a class="logo" href="./">v4l3r14 · security notes</a>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">◑ alto contraste</button>
+    </div>
+    <h1>Mis <span class="accent">writeups</span></h1>
+    <p class="tagline">Apuntes de máquinas, retos y labs mientras aprendo ciberseguridad desde cero. Reconocimiento, enumeración, acceso y escalada, paso a paso.</p>
+  </header>
+
+  <!-- Los filtros y las tarjetas se generan desde writeups/index.json -->
+  <div class="search">
+    <label class="visually-hidden" for="search">Buscar writeups por nombre</label>
+    <input id="search" class="search__input" type="search" placeholder="🔍 buscar por nombre o etiqueta…" autocomplete="off" spellcheck="false">
+  </div>
+  <nav class="filters" id="filters" aria-label="Filtrar writeups"></nav>
+  <p class="empty" id="no-results" hidden>Ningún writeup coincide con la búsqueda.</p>
+  <main class="grid" id="grid" aria-live="polite">
+    <p class="empty">Cargando…</p>
+  </main>
+
+<footer class="site-footer">
+  Hecho con café y nmap ☕ · <a href="https://github.com/val-velvaz/CTF-Writeups" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://www.hackthebox.com/" target="_blank" rel="noopener noreferrer">HTB</a>
+</footer>
+</div>
+</body>
+</html>

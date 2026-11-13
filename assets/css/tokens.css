@@ -1,0 +1,114 @@
+/* =========================================================
+   tokens.css — ÚNICO sitio donde viven colores y fuentes.
+   Cambia aquí la paleta y se actualiza toda la web.
+   ========================================================= */
+
+/* ---------- Tema por defecto: PASTEL ---------- */
+:root {
+  /* Fuentes */
+  --font-sans: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Fira Code', ui-monospace, 'Cascadia Code', monospace;
+
+  /* Paleta pastel */
+  --cream:      #FFFBF5;
+  --cream-2:    #FFF6EA;
+  --pink:       #FF99C9;
+  --pink-soft:  #F6B9DB;
+  --rose:       #FEC9C3;
+  --lavender:   #E4C1F9;
+  --lavender-2: #C494FF;
+  --mint:       #D7FBCB;
+  --mint-2:     #CFFF94;
+  --peach:      #FCF5BF;
+  --plum:       #5A00C7;
+
+  /* Roles semánticos (los componentes SOLO usan estos) */
+  --bg:            var(--cream);
+  --bg-glow-1:     #FDEFFA;
+  --bg-glow-2:     #EAFBE4;
+  --surface:       #FFFFFF;
+  --surface-2:     var(--cream-2);
+  --text:          #4A4458;
+  --text-soft:     #6E6784;
+  --heading:       #4A4458;
+  --accent:        var(--plum);
+  --accent-2:      #8A3FFC;          /* enlaces / acentos sobre fondo claro */
+  --accent-soft:   var(--lavender);
+  --border:        #EFE6F5;
+  --focus:         var(--plum);
+
+  --code-bg:       #2E2A3A;
+  --code-text:     #F3ECFF;
+  --code-comment:  #C9A9FF;
+
+  --flag-bg:       var(--mint);
+  --flag-text:     #2F6B1F;
+
+  --diff-easy:     var(--mint);
+  --diff-med:      var(--peach);
+  --diff-hard:     var(--rose);
+  --diff-insane:   var(--lavender);
+  --diff-text:     #4A4458;
+
+  --tone-pink:     var(--pink);
+  --tone-lav:      var(--lavender-2);
+  --tone-mint:     var(--mint-2);
+  --tone-rose:     var(--rose);
+  --tone-peach:    var(--peach);
+
+  --shadow:        0 6px 24px rgba(90, 0, 199, .08);
+  --shadow-hover:  0 14px 34px rgba(90, 0, 199, .14);
+  --radius:        20px;
+  --radius-sm:     12px;
+
+  color-scheme: light;
+}
+
+/* ---------- Tema ALTO CONTRASTE (neón sobre oscuro) ----------
+   Se activa con <html data-theme="contrast"> (botón del header)
+   o automáticamente si el sistema pide "más contraste".          */
+:root[data-theme="contrast"] {
+  --neon-pink:   #FF2E97;
+  --neon-purple: #C77DFF;
+  --neon-green:  #39FF14;
+  --neon-yellow: #FFE600;
+  --neon-cyan:   #00E5FF;
+
+  --bg:            #0B0912;
+  --bg-glow-1:     #0B0912;
+  --bg-glow-2:     #0B0912;
+  --surface:       #15111F;
+  --surface-2:     #221B33;
+  --text:          #FFFFFF;
+  --text-soft:     #E2DAF2;
+  --heading:       #FFFFFF;
+  --accent:        var(--neon-green);
+  --accent-2:      var(--neon-cyan);
+  --accent-soft:   var(--neon-yellow);
+  --border:        #FFFFFF;
+  --focus:         var(--neon-yellow);
+
+  --code-bg:       #000000;
+  --code-text:     #FFFFFF;
+  --code-comment:  var(--neon-green);
+
+  --flag-bg:       var(--neon-green);
+  --flag-text:     #000000;
+
+  --diff-easy:     var(--neon-green);
+  --diff-med:      var(--neon-yellow);
+  --diff-hard:     var(--neon-pink);
+  --diff-insane:   var(--neon-purple);
+  --diff-text:     #000000;
+
+  --tone-pink:     var(--neon-pink);
+  --tone-lav:      var(--neon-purple);
+  --tone-mint:     var(--neon-green);
+  --tone-rose:     var(--neon-pink);
+  --tone-peach:    var(--neon-yellow);
+
+  --shadow:        none;
+  --shadow-hover:  0 0 0 2px var(--neon-yellow);
+
+  color-scheme: dark;
+}

@@ -1,0 +1,45 @@
+{
+  "filtros": [
+    { "id": "htb",   "label": "HTB" },
+    { "id": "lab",   "label": "labs" },
+    { "id": "facil", "label": "fácil" }
+  ],
+  "writeups": [
+    {
+      "slug": "meow",
+      "titulo": "Meow",
+      "plataforma": "Hack The Box · Starting Point",
+      "so": "Linux",
+      "dificultad": "facil",
+      "fecha": "2026-11-13",
+      "color": "pink",
+      "categorias": ["htb", "facil"],
+      "tags": ["telnet", "enumeración", "sin-contraseña"],
+      "resumen": "Primera máquina de Starting Point: telnet expuesto y root sin contraseña."
+    },
+    {
+      "slug": "lab-ftp-web-ssh",
+      "titulo": "Cadena FTP → Web → SSH",
+      "plataforma": "Lab propio · Docker",
+      "dificultad": "facil",
+      "fecha": "2026-11-13",
+      "color": "mint",
+      "categorias": ["lab", "facil"],
+      "tags": ["ftp-anon", "robots.txt", "hydra", "sudo"],
+      "resumen": "Laboratorio en Docker: FTP anónimo, enumeración web, fuerza bruta SSH y escalada con find."
+    },
+    {
+      "slug": "archetype",
+      "titulo": "Archetype",
+      "plataforma": "Hack The Box · Starting Point",
+      "so": "Windows",
+      "dificultad": "facil",
+      "fecha": "2026-11-14",
+      "color": "lav",
+      "estado": "borrador",
+      "categorias": ["htb", "facil"],
+      "tags": ["smb", "mssql", "en-progreso"],
+      "resumen": "En progreso."
+    }
+  ]
+}
