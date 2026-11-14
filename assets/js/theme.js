@@ -14,11 +14,8 @@
     if (theme === 'contrast') root.setAttribute('data-theme', 'contrast');
     else root.removeAttribute('data-theme');
     const btn = document.getElementById('theme-toggle');
-    if (btn) {
-      const on = theme === 'contrast';
-      btn.setAttribute('aria-pressed', String(on));
-      btn.textContent = on ? '◐ modo pastel' : '◑ alto contraste';
-    }
+    // El texto del botón lo pone i18n.js; aquí solo el estado
+    if (btn) btn.setAttribute('aria-pressed', String(theme === 'contrast'));
   }
 
   const prefersMore = window.matchMedia && window.matchMedia('(prefers-contrast: more)').matches;

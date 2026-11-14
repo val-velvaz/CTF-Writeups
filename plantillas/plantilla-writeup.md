@@ -1,7 +1,8 @@
 <!--
   PLANTILLA DE WRITEUP
-  1. Copia este archivo a  writeups/<slug>.md   (slug: minúsculas, números y guiones)
-  2. Añade su entrada en  writeups/index.json  (ver README)
+  1. Copia este archivo a  writeups/<idioma>/<slug>.md   (idioma: en, es o de;
+     slug: minúsculas, números y guiones; igual en todas las traducciones)
+  2. Añade su entrada en  writeups/index.json  (ver README) y el idioma en "idiomas"
   3. Borra este comentario. (No se muestra, pero mejor dejarlo limpio.)
 
   Sintaxis soportada:

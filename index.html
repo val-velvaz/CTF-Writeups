@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,34 +15,41 @@
 <link rel="stylesheet" href="assets/css/components.css">
 <script src="assets/js/theme.js"></script>
 <title>Writeups · v4l3r14</title>
-<meta name="description" content="Writeups de ciberseguridad: máquinas, retos y labs paso a paso.">
+<meta name="description" content="Cybersecurity writeups: machines, challenges and labs, step by step." data-i18n-attr="content:meta.home_description">
 <script type="module" src="assets/js/home.js"></script>
 </head>
-<body>
-<a class="skip-link" href="#grid">Saltar a los writeups</a>
+<body data-i18n-title="meta.home_title">
+<a class="skip-link" href="#grid" data-i18n="skip_home">Skip to the writeups</a>
 <div class="wrap">
   <header class="site-header">
     <div class="topbar">
-      <a class="logo" href="./">v4l3r14 · security notes</a>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">◑ alto contraste</button>
+      <a class="logo" href="./" data-i18n="logo">v4l3r14 · security notes</a>
+      <div class="controls">
+        <!-- Botones EN / ES / DE: los genera i18n.js -->
+        <div id="lang-switch" class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:lang_label"></div>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
+          <span class="to-contrast" data-i18n="theme_to_contrast">◑ high contrast</span>
+          <span class="to-pastel" data-i18n="theme_to_pastel">◐ pastel mode</span>
+        </button>
+      </div>
     </div>
-    <h1>Mis <span class="accent">writeups</span></h1>
-    <p class="tagline">Apuntes de máquinas, retos y labs mientras aprendo ciberseguridad desde cero. Reconocimiento, enumeración, acceso y escalada, paso a paso.</p>
+    <h1><span data-i18n="hero_before">My</span> <span class="accent" data-i18n="hero_accent">writeups</span></h1>
+    <p class="tagline" data-i18n="tagline">Notes on machines, challenges and labs while I learn cybersecurity from scratch. Recon, enumeration, access and escalation, step by step.</p>
   </header>
 
   <!-- Los filtros y las tarjetas se generan desde writeups/index.json -->
   <div class="search">
-    <label class="visually-hidden" for="search">Buscar writeups por nombre</label>
-    <input id="search" class="search__input" type="search" placeholder="🔍 buscar por nombre o etiqueta…" autocomplete="off" spellcheck="false">
+    <label class="visually-hidden" for="search" data-i18n="search_label">Search writeups by name</label>
+    <input id="search" class="search__input" type="search" placeholder="🔍 search by name or tag…" data-i18n-attr="placeholder:search_placeholder" autocomplete="off" spellcheck="false">
   </div>
-  <nav class="filters" id="filters" aria-label="Filtrar writeups"></nav>
-  <p class="empty" id="no-results" hidden>Ningún writeup coincide con la búsqueda.</p>
+  <nav class="filters" id="filters" aria-label="Filter writeups" data-i18n-attr="aria-label:filters_label"></nav>
+  <p class="empty" id="no-results" hidden data-i18n="no_results">No writeup matches your search.</p>
   <main class="grid" id="grid" aria-live="polite">
-    <p class="empty">Cargando…</p>
+    <p class="empty" data-i18n="loading">Loading…</p>
   </main>
 
 <footer class="site-footer">
-  Hecho con café y nmap ☕ · <a href="https://github.com/val-velvaz/CTF-Writeups" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://www.hackthebox.com/" target="_blank" rel="noopener noreferrer">HTB</a>
+  <span data-i18n="footer">Made with coffee and nmap ☕</span> · <a href="https://github.com/val-velvaz/CTF-Writeups" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://www.hackthebox.com/" target="_blank" rel="noopener noreferrer">HTB</a>
 </footer>
 </div>
 </body>

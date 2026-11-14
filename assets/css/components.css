@@ -28,6 +28,31 @@ h1 .accent { color: var(--lavender-2, var(--accent)); }
 :root[data-theme="contrast"] h1 .accent { color: var(--neon-pink); }
 .tagline { color: var(--text-soft); font-size: 18px; max-width: 56ch; }
 
+/* ---------- Controles del header (idioma + tema) ---------- */
+.controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.lang-switch {
+  display: inline-flex; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 999px; padding: 3px; box-shadow: var(--shadow);
+}
+.lang-switch__btn {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  border: 0; background: transparent; color: var(--text-soft);
+  padding: 5px 10px; border-radius: 999px; cursor: pointer;
+}
+.lang-switch__btn[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
+:root[data-theme="contrast"] .lang-switch__btn[aria-pressed="true"] { color: #000; }
+
+/* El botón de tema tiene dos textos; se ve el que toca según el tema */
+.theme-toggle .to-pastel { display: none; }
+:root[data-theme="contrast"] .theme-toggle .to-pastel { display: inline; }
+:root[data-theme="contrast"] .theme-toggle .to-contrast { display: none; }
+
+/* Aviso "este writeup no está en tu idioma" */
+.notice {
+  margin-top: 20px !important; padding: 10px 14px; border-radius: var(--radius-sm);
+  background: var(--surface-2); border: 1px dashed var(--tone-lav); color: var(--text); font-size: 15px;
+}
+
 /* ---------- Buscador ---------- */
 .search { margin: 28px 0 0; }
 .search__input {
