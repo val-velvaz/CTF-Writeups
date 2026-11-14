@@ -1,50 +1,50 @@
 # CTF Writeups · v4l3r14
 
-Web estática (HTML + CSS + JS sin dependencias) para publicar mis writeups de ciberseguridad.
-Disponible en inglés, español y alemán. Tema pastel por defecto y modo **alto contraste** (botón arriba a la derecha; se recuerda la elección y se activa solo si el sistema pide más contraste).
+A static site (HTML + CSS + JS, no dependencies) for publishing my cybersecurity writeups.
+Available in English, Spanish and German. Pastel theme by default plus a **high-contrast** mode (top-right button; the choice is remembered, and it turns on automatically if the system asks for more contrast).
 
-## Idiomas
+## Languages
 
-La web está en **inglés (por defecto)**, **español** y **alemán**; los botones `EN · ES · DE` del header cambian el idioma y la elección se recuerda.
-También se puede enlazar directamente con `?lang=es` o `?lang=de`. Todo es estático: tú escribes cada traducción.
+The site is in **English (default)**, **Spanish** and **German**. The `EN · ES · DE` buttons in the header switch the language, and the choice is remembered.
+You can also link to a language directly with `?lang=es` or `?lang=de`. Everything is static: every translation is written by hand.
 
-- **Textos de la interfaz** → `assets/i18n/en.json`, `es.json`, `de.json` (mismas claves en los tres; si falta una clave se usa la inglesa).
-- **Datos del catálogo** (`titulo`, `plataforma`, `so`, `tags`, `resumen`, `label` de los filtros) → pueden ser texto normal o un objeto por idioma:
+- **Interface text** → `assets/i18n/en.json`, `es.json`, `de.json` (same keys in all three; a missing key falls back to English).
+- **Catalog data** (`titulo`, `plataforma`, `so`, `tags`, `resumen`, and the filters' `label`) → either plain text or one object per language:
   `"titulo": { "en": "FTP → Web → SSH chain", "es": "Cadena FTP → Web → SSH", "de": "FTP → Web → SSH Kette" }`
-- **Contenido de cada writeup** → `writeups/<idioma>/<slug>.md`. Si un writeup no existe en el idioma elegido, se muestra otra versión con un aviso.
+- **Writeup content** → `writeups/<lang>/<slug>.md`. If a writeup doesn't exist in the selected language, another version is shown with a notice.
 
-## Estructura
+## Structure
 
 ```
-index.html                 → portada (tarjetas, buscador y filtros, generados solos)
-writeup.html               → plantilla única para TODOS los writeups (?w=<slug>)
+index.html                 → home page (cards, search and filters, generated automatically)
+writeup.html               → single template for ALL writeups (?w=<slug>)
 writeups/
-  index.json               → catálogo: metadatos de cada writeup y filtros
-  en/<slug>.md             → writeup en inglés
-  es/<slug>.md             → writeup en español
-  de/<slug>.md             → writeup en alemán
+  index.json               → catalog: metadata for each writeup, plus the filters
+  en/<slug>.md             → writeup in English
+  es/<slug>.md             → writeup in Spanish
+  de/<slug>.md             → writeup in German
 plantillas/
-  plantilla-writeup.md     → punto de partida para un writeup nuevo
+  plantilla-writeup.md     → starting point for a new writeup
 assets/i18n/
-  en.json · es.json · de.json → textos de la interfaz
+  en.json · es.json · de.json → interface text
 assets/css/
-  tokens.css               → paletas (pastel + alto contraste) y fuentes ← cambia colores aquí
-  base.css                 → reset y layout
-  components.css           → header, chips, tarjetas, artículo, código
+  tokens.css               → palettes (pastel + high contrast) and fonts ← change colors here
+  base.css                 → reset and layout
+  components.css           → header, chips, cards, article, code
 assets/js/
-  i18n.js                  → idiomas (selector, traducciones, respaldo)
-  theme.js                 → cambio de tema
-  data.js                  → carga del catálogo + utilidades
-  home.js                  → pinta la portada
-  writeup.js               → pinta un writeup
-  markdown.js              → conversor Markdown → HTML (escapa todo, seguro)
+  i18n.js                  → languages (switcher, translations, fallback)
+  theme.js                 → theme toggle
+  data.js                  → catalog loading + helpers
+  home.js                  → renders the home page
+  writeup.js               → renders a writeup
+  markdown.js              → Markdown → HTML converter (escapes everything, safe)
 ```
 
-## Añadir un writeup nuevo
+## Adding a new writeup
 
-1. Copia `plantillas/plantilla-writeup.md` a `writeups/<idioma>/<slug>.md` (p. ej. `writeups/es/dancing.md`) y escríbelo.
-   Cuando lo traduzcas, crea `writeups/en/dancing.md` y `writeups/de/dancing.md` con el mismo nombre.
-2. Añade una entrada en `writeups/index.json` dentro de `"writeups"`:
+1. Copy `plantillas/plantilla-writeup.md` to `writeups/<lang>/<slug>.md` (e.g. `writeups/es/dancing.md`) and write it.
+   When you translate it, create `writeups/en/dancing.md` and `writeups/de/dancing.md` with the same file name.
+2. Add an entry to `writeups/index.json` inside `"writeups"`:
 
    ```json
    {
@@ -62,32 +62,38 @@ assets/js/
    }
    ```
 
-   | Campo | Valores |
+   | Field | Values |
    |---|---|
-   | `idiomas` | idiomas en los que existe el `.md` (opcional, evita peticiones a traducciones que no existen) — **actualízalo al traducir** |
-   | `dificultad` | `facil`, `media`, `dificil`, `insane` (su texto se traduce en `assets/i18n/*.json` → `difficulty`) |
-   | `color` (barra de la tarjeta) | `pink`, `lav`, `mint`, `rose`, `peach` |
-   | `categorias` | ids de `"filtros"` (añade un filtro nuevo ahí si hace falta) |
-   | `estado` | opcional: `"borrador"` → aparece como tarjeta "en progreso" sin enlace |
+   | `slug` | lowercase letters, numbers and hyphens; the same in every language |
+   | `idiomas` | languages the `.md` exists in (optional; avoids requesting translations that don't exist) — **update it when you add a translation** |
+   | `dificultad` | `facil`, `media`, `dificil`, `insane` (the label is translated in `assets/i18n/*.json` → `difficulty`) |
+   | `fecha` | date in `YYYY-MM-DD` format |
+   | `color` (card bar) | `pink`, `lav`, `mint`, `rose`, `peach` |
+   | `categorias` | ids from `"filtros"` (add a new filter there if needed) |
+   | `estado` | optional: `"borrador"` (draft) → shown as an "in progress" card with no link |
 
-3. Commit y push. Listo: la tarjeta, el filtro, la búsqueda y la página se generan solos.
+3. Commit and push. Done: the card, filter, search entry and page are generated automatically.
 
-Capturas: guárdalas en `img/<slug>/` y úsalas con `![descripción](img/<slug>/paso1.png)` (sirven para todos los idiomas).
+Screenshots: store them in `img/<slug>/` and use them with `![description](img/<slug>/step1.png)` (they work for every language).
 
-## Ver en local
+### Markdown syntax supported in writeups
 
-Los writeups se cargan con `fetch`, así que hay que servir la carpeta (abrir el HTML con doble clic no funciona):
+`## Section`, `### Subsection`, `**bold**`, `*italic*`, `` `command` ``, fenced ```` ``` ```` code blocks (lines starting with `#` are highlighted as comments), `-` / `1.` lists, `>` quotes, `[link](https://…)`, `![image](path)`, and `==flag==` to highlight a flag. HTML comments `<!-- … -->` are hidden.
+
+## Viewing locally
+
+Writeups are loaded with `fetch`, so the folder has to be served (double-clicking the HTML file won't work):
 
 ```bash
 python3 -m http.server 8000
 ```
 
-y abre `http://localhost:8000`.
+then open `http://localhost:8000`.
 
-## Publicar con HTTPS (GitHub Pages)
+## Publishing with HTTPS (GitHub Pages)
 
-Settings → Pages → *Deploy from a branch* → rama `main`, carpeta `/ (root)` → marca **Enforce HTTPS**.
-La web queda en `https://val-velvaz.github.io/CTF-Writeups/`.
+Settings → Pages → *Deploy from a branch* → branch `main`, folder `/ (root)` → tick **Enforce HTTPS**.
+The site will be available at `https://val-velvaz.github.io/CTF-Writeups/`.
 
-Seguridad incluida: Content-Security-Policy estricta (solo scripts propios, `upgrade-insecure-requests`),
-enlaces externos solo `https://` con `rel="noopener noreferrer"`, y el Markdown se escapa antes de renderizarse.
+Built-in security: a strict Content-Security-Policy (only first-party scripts, `upgrade-insecure-requests`),
+external links limited to `https://` with `rel="noopener noreferrer"`, and Markdown is escaped before rendering.
