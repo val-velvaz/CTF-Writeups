@@ -1,4 +1,4 @@
-// data.js — acceso al catálogo y utilidades compartidas entre páginas.
+// data.js — catalog access and helpers shared between pages.
 import { locale } from './i18n.js';
 
 export const CATALOG_URL = 'writeups/index.json';
@@ -8,15 +8,15 @@ export function loadCatalog() {
   catalogPromise ??= fetch(CATALOG_URL, { cache: 'no-cache' }).then(async (res) => {
     if (!res.ok) throw new Error(`${CATALOG_URL} (${res.status})`);
     const data = await res.json();
-    // Publicados primero (más recientes arriba), borradores al final
-    const draft = (w) => (w.estado === 'borrador' ? 1 : 0);
-    data.writeups.sort((a, b) => draft(a) - draft(b) || (b.fecha || '').localeCompare(a.fecha || ''));
+    // Published first (newest on top), drafts last
+    const draft = (w) => (w.status === 'draft' ? 1 : 0);
+    data.writeups.sort((a, b) => draft(a) - draft(b) || (b.date || '').localeCompare(a.date || ''));
     return data;
   });
   return catalogPromise;
 }
 
-// Slug seguro: solo minúsculas, números y guiones (evita rutas raras)
+// Safe slug: lowercase letters, numbers and hyphens only (no odd paths)
 export const isSafeSlug = (s) => typeof s === 'string' && /^[a-z0-9-]+$/.test(s);
 
 export function formatDate(iso) {
@@ -26,7 +26,7 @@ export function formatDate(iso) {
   return d.toLocaleDateString(locale(), { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
-// Crea elementos sin innerHTML (seguro ante contenido del JSON)
+// Builds elements without innerHTML (safe against JSON content)
 export function el(tag, attrs = {}, ...children) {
   const node = document.createElement(tag);
   for (const [k, v] of Object.entries(attrs)) {

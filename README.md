@@ -9,8 +9,8 @@ The site is in **English (default)**, **Spanish** and **German**. The `EN · ES 
 You can also link to a language directly with `?lang=es` or `?lang=de`. Everything is static: every translation is written by hand.
 
 - **Interface text** → `assets/i18n/en.json`, `es.json`, `de.json` (same keys in all three; a missing key falls back to English).
-- **Catalog data** (`titulo`, `plataforma`, `so`, `tags`, `resumen`, and the filters' `label`) → either plain text or one object per language:
-  `"titulo": { "en": "FTP → Web → SSH chain", "es": "Cadena FTP → Web → SSH", "de": "FTP → Web → SSH Kette" }`
+- **Catalog data** (`title`, `platform`, `os`, `tags`, `summary`, and the filters' `label`) → either plain text or one object per language:
+  `"title": { "en": "FTP → Web → SSH chain", "es": "Cadena FTP → Web → SSH", "de": "FTP → Web → SSH Kette" }`
 - **Writeup content** → `writeups/<lang>/<slug>.md`. If a writeup doesn't exist in the selected language, another version is shown with a notice.
 
 ## Structure
@@ -23,8 +23,8 @@ writeups/
   en/<slug>.md             → writeup in English
   es/<slug>.md             → writeup in Spanish
   de/<slug>.md             → writeup in German
-plantillas/
-  plantilla-writeup.md     → starting point for a new writeup
+templates/
+  writeup-template.md      → starting point for a new writeup
 assets/i18n/
   en.json · es.json · de.json → interface text
 assets/css/
@@ -42,35 +42,35 @@ assets/js/
 
 ## Adding a new writeup
 
-1. Copy `plantillas/plantilla-writeup.md` to `writeups/<lang>/<slug>.md` (e.g. `writeups/es/dancing.md`) and write it.
+1. Copy `templates/writeup-template.md` to `writeups/<lang>/<slug>.md` (e.g. `writeups/es/dancing.md`) and write it.
    When you translate it, create `writeups/en/dancing.md` and `writeups/de/dancing.md` with the same file name.
 2. Add an entry to `writeups/index.json` inside `"writeups"`:
 
    ```json
    {
      "slug": "dancing",
-     "idiomas": ["es", "en"],
-     "titulo": "Dancing",
-     "plataforma": "Hack The Box · Starting Point",
-     "so": "Windows",
-     "dificultad": "facil",
-     "fecha": "2026-11-20",
+     "languages": ["es", "en"],
+     "title": "Dancing",
+     "platform": "Hack The Box · Starting Point",
+     "os": "Windows",
+     "difficulty": "easy",
+     "date": "2026-11-20",
      "color": "rose",
-     "categorias": ["htb", "facil"],
+     "categories": ["htb", "easy"],
      "tags": ["smb", { "en": "enumeration", "es": "enumeración", "de": "Enumeration" }],
-     "resumen": { "en": "One line…", "es": "Una línea…", "de": "Eine Zeile…" }
+     "summary": { "en": "One line…", "es": "Una línea…", "de": "Eine Zeile…" }
    }
    ```
 
    | Field | Values |
    |---|---|
    | `slug` | lowercase letters, numbers and hyphens; the same in every language |
-   | `idiomas` | languages the `.md` exists in (optional; avoids requesting translations that don't exist) — **update it when you add a translation** |
-   | `dificultad` | `facil`, `media`, `dificil`, `insane` (the label is translated in `assets/i18n/*.json` → `difficulty`) |
-   | `fecha` | date in `YYYY-MM-DD` format |
+   | `languages` | languages the `.md` exists in (optional; avoids requesting translations that don't exist) — **update it when you add a translation** |
+   | `difficulty` | `easy`, `medium`, `hard`, `insane` (the label is translated in `assets/i18n/*.json` → `difficulty`) |
+   | `date` | date in `YYYY-MM-DD` format |
    | `color` (card bar) | `pink`, `lav`, `mint`, `rose`, `peach` |
-   | `categorias` | ids from `"filtros"` (add a new filter there if needed) |
-   | `estado` | optional: `"borrador"` (draft) → shown as an "in progress" card with no link |
+   | `categories` | ids from `"filters"` (add a new filter there if needed) |
+   | `status` | optional: `"draft"` → shown as an "in progress" card with no link |
 
 3. Commit and push. Done: the card, filter, search entry and page are generated automatically.
 

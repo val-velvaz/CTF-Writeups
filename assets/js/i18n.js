@@ -1,19 +1,19 @@
-// i18n.js — idiomas de la interfaz (textos estáticos en assets/i18n/<lang>.json)
+// i18n.js — interface languages (static strings in assets/i18n/<lang>.json)
 //
-// En el HTML:
-//   data-i18n="clave"                       → textContent
-//   data-i18n-attr="placeholder:clave;aria-label:otra"  → atributos
+// In HTML:
+//   data-i18n="key"                         → textContent
+//   data-i18n-attr="placeholder:key;aria-label:other"  → attributes
 //   <body data-i18n-title="meta.home_title"> → <title>
-// En JS:  t('clave', { var: 'valor' })   pick(valor | { en, es, de })
+// In JS:  t('key', { var: 'value' })   pick(value | { en, es, de })
 
-export const LANGS = ['en', 'es', 'de'];      // orden de los botones y de respaldo
+export const LANGS = ['en', 'es', 'de'];      // button order and fallback order
 export const DEFAULT_LANG = 'en';
 const KEY = 'lang';
 const LOCALES = { en: 'en-GB', es: 'es-ES', de: 'de-DE' };
 
 let lang = DEFAULT_LANG;
 let dict = {};
-let base = {};                                // inglés: respaldo de claves sin traducir
+let base = {};                                // English: fallback for untranslated keys
 const listeners = [];
 
 const cache = {};
@@ -32,7 +32,7 @@ function detectLang() {
   try {
     const saved = localStorage.getItem(KEY);
     if (LANGS.includes(saved)) return saved;
-  } catch (_) { /* modo privado */ }
+  } catch (_) { /* private mode */ }
   return DEFAULT_LANG;
 }
 
@@ -45,7 +45,7 @@ export function t(key, vars = {}) {
   return String(s).replace(/\{(\w+)\}/g, (_, k) => (vars[k] !== undefined ? vars[k] : `{${k}}`));
 }
 
-// Campo del catálogo que puede ser texto o { en, es, de }
+// Catalog field that can be plain text or { en, es, de }
 export function pick(value) {
   if (value && typeof value === 'object' && !Array.isArray(value)) {
     return value[lang] ?? value[DEFAULT_LANG] ?? Object.values(value)[0] ?? '';
@@ -76,7 +76,7 @@ function applyStatic() {
 export async function setLang(next) {
   if (!LANGS.includes(next)) return;
   lang = next;
-  try { localStorage.setItem(KEY, next); } catch (_) { /* modo privado */ }
+  try { localStorage.setItem(KEY, next); } catch (_) { /* private mode */ }
   dict = await loadDict(next);
   applyStatic();
   listeners.forEach((fn) => fn(lang));

@@ -1,4 +1,4 @@
-/* base.css — reset, tipografía y layout general */
+/* base.css — reset, typography and general layout */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { -webkit-text-size-adjust: 100%; }

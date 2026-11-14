@@ -24,7 +24,7 @@
   "in_progress": "en progreso…",
   "read_more": "leer writeup →",
   "tags_label": "etiquetas",
-  "difficulty": { "facil": "fácil", "media": "media", "dificil": "difícil", "insane": "insane" },
+  "difficulty": { "easy": "fácil", "medium": "media", "hard": "difícil", "insane": "insane" },
   "back": "← todos los writeups",
   "back_home": "← volver al inicio",
   "oops": "Ups…",

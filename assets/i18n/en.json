@@ -24,7 +24,7 @@
   "in_progress": "in progress…",
   "read_more": "read writeup →",
   "tags_label": "tags",
-  "difficulty": { "facil": "easy", "media": "medium", "dificil": "hard", "insane": "insane" },
+  "difficulty": { "easy": "easy", "medium": "medium", "hard": "hard", "insane": "insane" },
   "back": "← all writeups",
   "back_home": "← back to home",
   "oops": "Oops…",

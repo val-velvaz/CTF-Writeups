@@ -1,13 +1,13 @@
-// home.js — pinta las tarjetas y los filtros a partir de writeups/index.json
+// home.js — renders the cards and filters from writeups/index.json
 import { loadCatalog, isSafeSlug, formatDate, el } from './data.js';
 import { initI18n, onLangChange, t, pick } from './i18n.js';
 
 const TONES = ['pink', 'lav', 'mint', 'rose', 'peach'];
 
-// minúsculas y sin tildes: "Enumeración" encuentra "enumeracion"
+// lowercase, accents stripped: "Enumeración" matches "enumeracion"
 const normalize = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
-// todas las traducciones de un campo (texto o { en, es, de })
+// every translation of a field (plain text or { en, es, de })
 const allVariants = (v) => (v && typeof v === 'object' ? Object.values(v) : [v ?? '']);
 
 const grid = document.getElementById('grid');
@@ -18,17 +18,17 @@ const state = { cat: 'all', q: '' };
 let cards = [];
 
 function card(w) {
-  const ready = w.estado !== 'borrador' && isSafeSlug(w.slug);
+  const ready = w.status !== 'draft' && isSafeSlug(w.slug);
   const tone = TONES.includes(w.color) ? w.color : 'lav';
   const tags = (w.tags || []).map(pick);
-  const title = pick(w.titulo);
+  const title = pick(w.title);
 
   const body = el('div', { class: 'card__body' },
-    el('span', { class: 'platform' }, pick(w.plataforma)),
+    el('span', { class: 'platform' }, pick(w.platform)),
     el('h3', {}, title),
     el('div', { class: 'meta' },
-      el('span', { class: 'date' }, ready ? formatDate(w.fecha) : t('in_progress')),
-      w.dificultad && el('span', { class: `diff diff--${w.dificultad}` }, t(`difficulty.${w.dificultad}`)),
+      el('span', { class: 'date' }, ready ? formatDate(w.date) : t('in_progress')),
+      w.difficulty && el('span', { class: `diff diff--${w.difficulty}` }, t(`difficulty.${w.difficulty}`)),
     ),
     el('ul', { class: 'tags', 'aria-label': t('tags_label') }, tags.map((tag) => el('li', { class: 'tag' }, tag))),
     ready && el('span', { class: 'card__cta', 'aria-hidden': 'true' }, t('read_more')),
@@ -36,9 +36,9 @@ function card(w) {
 
   const attrs = {
     class: `card${ready ? '' : ' card--soon'}`,
-    'data-cat': (w.categorias || []).join(' '),
-    // se busca en nombre, plataforma y etiquetas en TODOS los idiomas
-    'data-search': normalize([w.titulo, w.plataforma, ...(w.tags || [])].flatMap(allVariants).join(' ')),
+    'data-cat': (w.categories || []).join(' '),
+    // search covers title, platform and tags in ALL languages
+    'data-search': normalize([w.title, w.platform, ...(w.tags || [])].flatMap(allVariants).join(' ')),
   };
   if (ready) attrs.href = `writeup.html?w=${encodeURIComponent(w.slug)}`;
   return el(ready ? 'a' : 'div', attrs, el('div', { class: `card__bar tone--${tone}` }), body);
@@ -58,8 +58,8 @@ function applyFilters() {
 
 async function render() {
   try {
-    const { filtros = [], writeups } = await loadCatalog();
-    nav.replaceChildren(...[{ id: 'all', label: t('filter_all') }, ...filtros].map((f) =>
+    const { filters = [], writeups } = await loadCatalog();
+    nav.replaceChildren(...[{ id: 'all', label: t('filter_all') }, ...filters].map((f) =>
       el('button', { class: 'chip', type: 'button', 'data-f': f.id, 'aria-pressed': String(f.id === state.cat) },
         pick(f.label))));
     if (!writeups.length) {
@@ -87,7 +87,7 @@ search.addEventListener('input', () => {
   state.q = normalize(search.value.trim());
   applyFilters();
 });
-// "/" salta al buscador, Esc lo vacía
+// "/" jumps to the search box, Esc clears it
 document.addEventListener('keydown', (e) => {
   if (e.key === '/' && document.activeElement !== search) { e.preventDefault(); search.focus(); }
   if (e.key === 'Escape' && document.activeElement === search) { search.value = ''; state.q = ''; applyFilters(); }

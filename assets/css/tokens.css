@@ -1,15 +1,15 @@
 /* =========================================================
-   tokens.css — ÚNICO sitio donde viven colores y fuentes.
-   Cambia aquí la paleta y se actualiza toda la web.
+   tokens.css — the ONLY place where colors and fonts live.
+   Change the palette here and the whole site updates.
    ========================================================= */
 
-/* ---------- Tema por defecto: PASTEL ---------- */
+/* ---------- Default theme: PASTEL ---------- */
 :root {
-  /* Fuentes */
+  /* Fonts */
   --font-sans: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'Fira Code', ui-monospace, 'Cascadia Code', monospace;
 
-  /* Paleta pastel */
+  /* Pastel palette */
   --cream:      #FFFBF5;
   --cream-2:    #FFF6EA;
   --pink:       #FF99C9;
@@ -22,7 +22,7 @@
   --peach:      #FCF5BF;
   --plum:       #5A00C7;
 
-  /* Roles semánticos (los componentes SOLO usan estos) */
+  /* Semantic roles (components use ONLY these) */
   --bg:            var(--cream);
   --bg-glow-1:     #FDEFFA;
   --bg-glow-2:     #EAFBE4;
@@ -32,7 +32,7 @@
   --text-soft:     #6E6784;
   --heading:       #4A4458;
   --accent:        var(--plum);
-  --accent-2:      #8A3FFC;          /* enlaces / acentos sobre fondo claro */
+  --accent-2:      #8A3FFC;          /* links / accents on light background */
   --accent-soft:   var(--lavender);
   --border:        #EFE6F5;
   --focus:         var(--plum);
@@ -64,9 +64,9 @@
   color-scheme: light;
 }
 
-/* ---------- Tema ALTO CONTRASTE (neón sobre oscuro) ----------
-   Se activa con <html data-theme="contrast"> (botón del header)
-   o automáticamente si el sistema pide "más contraste".          */
+/* ---------- HIGH CONTRAST theme (neon on dark) ----------
+   Enabled with <html data-theme="contrast"> (header button)
+   or automatically when the system asks for "more contrast".     */
 :root[data-theme="contrast"] {
   --neon-pink:   #FF2E97;
   --neon-purple: #C77DFF;

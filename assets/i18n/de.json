@@ -24,7 +24,7 @@
   "in_progress": "in Arbeit…",
   "read_more": "Writeup lesen →",
   "tags_label": "Tags",
-  "difficulty": { "facil": "leicht", "media": "mittel", "dificil": "schwer", "insane": "insane" },
+  "difficulty": { "easy": "leicht", "medium": "mittel", "hard": "schwer", "insane": "insane" },
   "back": "← alle Writeups",
   "back_home": "← zurück zur Startseite",
   "oops": "Hoppla…",

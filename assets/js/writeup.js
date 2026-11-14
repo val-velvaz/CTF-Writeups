@@ -1,5 +1,5 @@
-// writeup.js — carga writeups/<idioma>/<slug>.md y lo muestra con la plantilla común.
-// Si no existe en el idioma elegido, usa otro disponible y muestra un aviso.
+// writeup.js — loads writeups/<lang>/<slug>.md and renders it with the shared template.
+// If it doesn't exist in the selected language, falls back to another one and shows a notice.
 import { loadCatalog, isSafeSlug, formatDate, el } from './data.js';
 import { initI18n, onLangChange, t, pick, currentLang, LANGS, DEFAULT_LANG } from './i18n.js';
 import { renderMarkdown } from './markdown.js';
@@ -9,7 +9,7 @@ const body = document.getElementById('article-body');
 const slug = new URLSearchParams(location.search).get('w');
 
 async function fetchMarkdown(lang, available) {
-  // "idiomas" en index.json (opcional) evita pedir traducciones que no existen
+  // "languages" in index.json (optional) avoids requesting translations that don't exist
   const order = [lang, DEFAULT_LANG, ...LANGS]
     .filter((l, i, a) => a.indexOf(l) === i)
     .filter((l) => !Array.isArray(available) || available.includes(l));
@@ -25,27 +25,27 @@ async function render() {
     if (!isSafeSlug(slug)) throw new Error(t('invalid'));
     const { writeups } = await loadCatalog();
     const w = writeups.find((x) => x.slug === slug);
-    if (!w || w.estado === 'borrador') throw new Error(t('not_found'));
+    if (!w || w.status === 'draft') throw new Error(t('not_found'));
 
     const lang = currentLang();
-    const { md, shown } = await fetchMarkdown(lang, w.idiomas);
-    const title = pick(w.titulo);
+    const { md, shown } = await fetchMarkdown(lang, w.languages);
+    const title = pick(w.title);
 
     document.title = `${title} · Writeups`;
     const desc = document.querySelector('meta[name="description"]');
-    if (desc && w.resumen) desc.setAttribute('content', pick(w.resumen));
+    if (desc && w.summary) desc.setAttribute('content', pick(w.summary));
 
-    const metaLine = [pick(w.plataforma), pick(w.so), w.dificultad && t(`difficulty.${w.dificultad}`)]
+    const metaLine = [pick(w.platform), pick(w.os), w.difficulty && t(`difficulty.${w.difficulty}`)]
       .filter(Boolean).join(' · ');
     head.replaceChildren(
       el('span', { class: 'platform' }, metaLine),
       el('h1', {}, title),
-      el('div', { class: 'meta' }, el('time', { class: 'date', datetime: w.fecha }, formatDate(w.fecha))),
+      el('div', { class: 'meta' }, el('time', { class: 'date', datetime: w.date }, formatDate(w.date))),
       el('ul', { class: 'tags', 'aria-label': t('tags_label') },
         (w.tags || []).map((tag) => el('li', { class: 'tag' }, pick(tag)))),
     );
 
-    // renderMarkdown escapa todo el HTML de entrada → seguro de insertar
+    // renderMarkdown escapes all input HTML → safe to insert
     body.innerHTML = renderMarkdown(md);
     body.lang = shown;
     if (shown !== lang) {
