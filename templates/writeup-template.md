@@ -6,7 +6,7 @@
   3. Delete this comment. (It isn't rendered, but it's cleaner without it.)
 
   Supported syntax:
-    ## Section          ### Subsection
+    # Part   ## Section   ### Subsection   #### Detail   (each level has its own color)
     **bold**  *italic*  `command`
     ```  code block  ```   (lines starting with # are shown as comments)
     - lists  /  1. numbered lists

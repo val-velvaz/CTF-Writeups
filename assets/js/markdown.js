@@ -71,9 +71,9 @@ export function renderMarkdown(src) {
     if (/^\s*$/.test(line)) { i++; continue; }
 
     const h = line.match(/^(#{1,4})\s+(.*)$/);
-    if (h) {                                        // # and ## → h2, ### → h3 (h1 is the page title)
-      const lvl = Math.max(h[1].length, 2);
-      out.push(`<h${lvl}>${inline(h[2])}</h${lvl}>`);
+    if (h) {                                        // # → h2, ## → h3, ### → h4, #### → h5 (h1 is the page title)
+      const md = h[1].length;                       // class md-h<n> = number of # → its own color
+      out.push(`<h${md + 1} class="md-h${md}">${inline(h[2])}</h${md + 1}>`);
       i++; continue;
     }
     if (/^(-{3,}|\*{3,})\s*$/.test(line)) { out.push('<hr>'); i++; continue; }
