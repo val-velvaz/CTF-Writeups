@@ -31,7 +31,11 @@
   --text:          #4A4458;
   --text-soft:     #6E6784;
   --heading:       #4A4458;
-  --section-heading: #f078d2;      /* ## headings inside writeups */
+  /* Writeup headings: one color per level (# ## ### ####) */
+  --md-h1: #A56BF5;               /* lavender */
+  --md-h2: #E0569E;               /* pink */
+  --md-h3: #2E9E6E;               /* mint */
+  --md-h4: #C47219;               /* peach */
   --accent:        var(--plum);
   --accent-2:      #8A3FFC;          /* links / accents on light background */
   --accent-soft:   var(--lavender);
@@ -83,7 +87,10 @@
   --text:          #FFFFFF;
   --text-soft:     #E2DAF2;
   --heading:       #FFFFFF;
-  --section-heading: var(--neon-green);
+  --md-h1: var(--neon-purple);
+  --md-h2: var(--neon-pink);
+  --md-h3: var(--neon-green);
+  --md-h4: var(--neon-yellow);
   --accent:        var(--neon-green);
   --accent-2:      var(--neon-cyan);
   --accent-soft:   var(--neon-yellow);

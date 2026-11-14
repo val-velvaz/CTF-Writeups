@@ -78,7 +78,62 @@ Screenshots: store them in `img/<slug>/` and use them with `![description](img/<
 
 ### Markdown syntax supported in writeups
 
-`## Section`, `### Subsection`, `**bold**`, `*italic*`, `` `command` ``, fenced ```` ``` ```` code blocks (lines starting with `#` are highlighted as comments), `-` / `1.` lists, `>` quotes, `[link](https://…)`, `![image](path)`, and `==flag==` to highlight a flag. HTML comments `<!-- … -->` are hidden.
+`#`, `##`, `###`, `####` headings (each level has its own color: `--md-h1` … `--md-h4` in `tokens.css`), `**bold**`, `*italic*`, `` `command` ``, fenced ```` ``` ```` code blocks (lines starting with `#` are highlighted as comments), `-` / `1.` lists, `>` quotes, `[link](https://…)`, `![image](path)`, and `==flag==` to highlight a flag. HTML comments `<!-- … -->` are hidden.
+
+## Git workflow
+
+This project follows **GitHub Flow**: `main` is always working and is what GitHub Pages publishes, and every change goes through a short-lived branch and a pull request.
+
+```
+main ──●────────●─────────●──
+        \      /  \      /
+         ●──●─●    ●──●─●
+       writeup/meow  fix/search
+```
+
+### Rules
+
+1. **Never commit directly to `main`.** Start every task from an up-to-date `main`.
+2. **One branch per task**, named with a prefix that says what it is:
+
+   | Prefix | Use | Example |
+   |---|---|---|
+   | `writeup/` | new writeup or changes/translations of one | `writeup/meow`, `writeup/dancing` |
+   | `style/` | colors, fonts, layout | `style/heading-color` |
+   | `feat/` | new site feature | `feat/dark-code-theme` |
+   | `fix/` | bug fix | `fix/search-accents` |
+   | `docs/` | README and documentation | `docs/git-workflow` |
+
+3. **Small commits with clear messages**, e.g. `Meow: add English version`. For writeups, one commit per language.
+4. **Everything reaches `main` through a pull request**, even when you merge it yourself — the PR is the history of what changed and why.
+5. **After merging**, delete the branch and update your local `main`.
+
+### Day-to-day commands
+
+```bash
+# 1. start from an up-to-date main
+git switch main
+git pull
+
+# 2. create the task branch
+git switch -c writeup/meow
+
+# 3. work and commit (repeat as needed)
+git add writeups/en/meow.md writeups/index.json
+git commit -m "Meow: add English version"
+
+# 4. push and open a pull request on GitHub
+git push -u origin writeup/meow
+
+# 5. after merging the PR on GitHub
+git switch main
+git pull
+git branch -d writeup/meow
+```
+
+### Protecting `main` (optional)
+
+On GitHub: **Settings → Rules → Rulesets → New branch ruleset**, target the default branch (`main`), and enable **Require a pull request before merging**. GitHub will then reject direct pushes to `main`.
 
 ## Viewing locally
 
