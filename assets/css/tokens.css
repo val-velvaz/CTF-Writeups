@@ -20,7 +20,7 @@
   --mint:       #D7FBCB;
   --mint-2:     #CFFF94;
   --peach:      #FCF5BF;
-  --plum:       #f078d2;
+  --plum:       #5A00C7;
 
   /* Semantic roles (components use ONLY these) */
   --bg:            var(--cream);
@@ -31,6 +31,7 @@
   --text:          #4A4458;
   --text-soft:     #6E6784;
   --heading:       #4A4458;
+  --section-heading: #f078d2;      /* ## headings inside writeups */
   --accent:        var(--plum);
   --accent-2:      #8A3FFC;          /* links / accents on light background */
   --accent-soft:   var(--lavender);
@@ -82,6 +83,7 @@
   --text:          #FFFFFF;
   --text-soft:     #E2DAF2;
   --heading:       #FFFFFF;
+  --section-heading: var(--neon-green);
   --accent:        var(--neon-green);
   --accent-2:      var(--neon-cyan);
   --accent-soft:   var(--neon-yellow);
