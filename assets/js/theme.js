@@ -1,5 +1,5 @@
-// theme.js — se carga en <head> (sin defer) para evitar parpadeo de tema.
-// Guarda la preferencia del visitante y respeta "prefers-contrast: more".
+// theme.js — loaded in <head> (no defer) to avoid a theme flash.
+// Stores the visitor's choice and respects "prefers-contrast: more".
 (function () {
   const KEY = 'theme';
   const root = document.documentElement;
@@ -8,17 +8,14 @@
     try { return localStorage.getItem(KEY); } catch (_) { return null; }
   }
   function save(v) {
-    try { localStorage.setItem(KEY, v); } catch (_) { /* modo privado */ }
+    try { localStorage.setItem(KEY, v); } catch (_) { /* private mode */ }
   }
   function apply(theme) {
     if (theme === 'contrast') root.setAttribute('data-theme', 'contrast');
     else root.removeAttribute('data-theme');
     const btn = document.getElementById('theme-toggle');
-    if (btn) {
-      const on = theme === 'contrast';
-      btn.setAttribute('aria-pressed', String(on));
-      btn.textContent = on ? '◐ modo pastel' : '◑ alto contraste';
-    }
+    // i18n.js sets the button text; this only sets its state
+    if (btn) btn.setAttribute('aria-pressed', String(theme === 'contrast'));
   }
 
   const prefersMore = window.matchMedia && window.matchMedia('(prefers-contrast: more)').matches;

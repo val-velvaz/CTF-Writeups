@@ -1,21 +1,21 @@
-// markdown.js — renderizador Markdown pequeño y SEGURO (sin dependencias).
-// Escapa todo el HTML primero, así un writeup nunca puede inyectar scripts.
-// Soporta: # títulos, párrafos, **negrita**, *cursiva*, `código`, ```bloques```,
-// listas (- / 1.), > citas, --- separadores, [enlaces](https://…), ![img](ruta),
-// y banderas con ==texto== → <span class="flag">.
-// En los bloques de código, las líneas que empiezan por "#" se pintan como comentario.
+// markdown.js — small, SAFE Markdown renderer (no dependencies).
+// Escapes all HTML first, so a writeup can never inject scripts.
+// Supports: # headings, paragraphs, **bold**, *italic*, `code`, ```blocks```,
+// lists (- / 1.), > quotes, --- rules, [links](https://…), ![img](path),
+// and flags with ==text== → <span class="flag">.
+// Inside code blocks, lines starting with "#" are styled as comments.
 
 const esc = (s) => s
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
-// Solo permite https:, rutas relativas y anclas. Bloquea javascript:, data:, http:
+// Only allows https:, relative paths and anchors. Blocks javascript:, data:, http:
 function safeUrl(url) {
   const u = url.trim();
   if (/^https:\/\//i.test(u)) return u;
-  if (/^[a-z][a-z0-9+.-]*:/i.test(u)) return null;   // otro esquema → fuera
+  if (/^[a-z][a-z0-9+.-]*:/i.test(u)) return null;   // any other scheme → rejected
   if (u.startsWith('//')) return null;
-  return u;                                           // relativa o #ancla
+  return u;                                           // relative path or #anchor
 }
 
 function inline(text) {
@@ -52,7 +52,7 @@ function codeBlock(lines) {
 export function renderMarkdown(src) {
   const lines = src
     .replace(/\r\n?/g, '\n')
-    .replace(/<!--[\s\S]*?-->/g, '')       // comentarios = notas privadas, no se muestran
+    .replace(/<!--[\s\S]*?-->/g, '')       // comments = private notes, not rendered
     .split('\n');
   const out = [];
   let i = 0;
@@ -60,7 +60,7 @@ export function renderMarkdown(src) {
   while (i < lines.length) {
     const line = lines[i];
 
-    if (/^```/.test(line)) {                       // bloque de código
+    if (/^```/.test(line)) {                       // code block
       const buf = [];
       i++;
       while (i < lines.length && !/^```/.test(lines[i])) buf.push(lines[i++]);
@@ -71,7 +71,7 @@ export function renderMarkdown(src) {
     if (/^\s*$/.test(line)) { i++; continue; }
 
     const h = line.match(/^(#{1,4})\s+(.*)$/);
-    if (h) {                                        // # y ## → h2, ### → h3 (h1 es el título de la página)
+    if (h) {                                        // # and ## → h2, ### → h3 (h1 is the page title)
       const lvl = Math.max(h[1].length, 2);
       out.push(`<h${lvl}>${inline(h[2])}</h${lvl}>`);
       i++; continue;
