@@ -29,14 +29,8 @@ h1 .accent { color: var(--lavender-2, var(--accent)); }
 .tagline { color: var(--text-soft); font-size: 18px; max-width: 56ch; }
 
 /* ---------- Header controls (language + theme) ---------- */
-/* Pinned to the top-right corner of the page, always visible while scrolling */
-.controls {
-  position: fixed; top: 12px; right: 12px; z-index: 20;
-  display: flex; align-items: center; gap: 8px;
-}
-@media (max-width: 520px) {
-  .site-header { padding-top: 64px; }   /* room for the corner controls */
-}
+/* Same row as the logo; the theme button ends on the content's right edge */
+.controls { display: flex; align-items: center; gap: 8px; margin-left: auto; }
 .lang-switch {
   display: inline-flex; background: var(--surface); border: 1px solid var(--border);
   border-radius: 999px; padding: 3px; box-shadow: var(--shadow);
