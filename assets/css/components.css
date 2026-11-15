@@ -160,6 +160,9 @@ pre {
   font-family: var(--font-mono); font-size: 13px;
   background: var(--code-bg); color: var(--code-text); border-radius: 14px;
   padding: 16px 18px; overflow-x: auto; margin: 12px 0; line-height: 1.7;
+  /* Long lines wrap inside the box instead of being cut off */
+  white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word;
+  max-width: 100%;
 }
 :root[data-theme="contrast"] pre { border: 1px solid var(--border); }
 pre .c { color: var(--code-comment); }
