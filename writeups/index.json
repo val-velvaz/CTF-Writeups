@@ -25,7 +25,8 @@
     {
       "slug": "meow",
       "languages": [
-        "es", "en"
+        "es",
+        "en"
       ],
       "title": "Meow",
       "platform": "Hack The Box · Starting Point",
@@ -114,6 +115,46 @@
         "en": "In progress.",
         "es": "En progreso.",
         "de": "In Arbeit."
+      }
+    },
+    {
+      "slug": "home-network-gpon-audit",
+      "languages": [
+        "es"
+      ],
+      "title": {
+        "en": "Auditing my own network: from nmap to the firmware of a Fiberhome GPON",
+        "es": "Auditando mi propia red: del nmap al firmware de un GPON Fiberhome",
+        "de": "Mein eigenes Netzwerk auditieren: von nmap bis zur Firmware eines Fiberhome-GPON"
+      },
+      "platform": {
+        "en": "Own lab · Home network",
+        "es": "Lab propio · Red doméstica",
+        "de": "Eigenes Lab · Heimnetz"
+      },
+      "os": "Fiberhome HG6145F1 · Windows",
+      "difficulty": "medium",
+      "date": "2026-11-19",
+      "color": "peach",
+      "categories": [
+        "lab"
+      ],
+      "tags": [
+        "nmap",
+        "smb",
+        "gpon",
+        "fiberhome",
+        "CVE-2025-63353",
+        {
+          "en": "info-disclosure",
+          "es": "fuga-de-información",
+          "de": "Informationsleck"
+        }
+      ],
+      "summary": {
+        "en": "Recon of my own home network: host discovery, SMB hardening, a pre-auth info leak on the ISP router and CVE-2025-63353.",
+        "es": "Reconocimiento de mi propia red: descubrimiento de hosts, SMB endurecido, fuga pre-autenticación en el router del ISP y la CVE-2025-63353.",
+        "de": "Aufklärung im eigenen Heimnetz: Host-Erkennung, gehärtetes SMB, ein Pre-Auth-Informationsleck im ISP-Router und CVE-2025-63353."
       }
     }
   ]

@@ -11,6 +11,8 @@
     ```  code block  ```   (lines starting with # are shown as comments)
     - lists  /  1. numbered lists
     > note / quote
+    | Col A | Col B |   ← table: header row, then |---|---|, then one row per line
+    |---|---|
     [link](https://...)     ![screenshot](img/<slug>/step1.png)
     ==flag==                → highlighted as a flag
 -->
