@@ -2,7 +2,7 @@
 // Escapes all HTML first, so a writeup can never inject scripts.
 // Supports: # headings, paragraphs, **bold**, *italic*, `code`, ```blocks```,
 // lists (- / 1.), > quotes, --- rules, [links](https://…), ![img](path),
-// and flags with ==text== → <span class="flag">.
+// | tables | (header row + |---| separator), and flags with ==text== → <span class="flag">.
 // Inside code blocks, lines starting with "#" are styled as comments.
 
 const esc = (s) => s
@@ -49,6 +49,31 @@ function codeBlock(lines) {
   return `<pre><code>${body}</code></pre>`;
 }
 
+// Splits a table row into cells, ignoring pipes inside `code` and escaped \|
+function tableCells(row) {
+  const s = row.trim().replace(/^\|/, '').replace(/\|$/, '');
+  const cells = [];
+  let cur = '', inCode = false;
+  for (let k = 0; k < s.length; k++) {
+    const ch = s[k];
+    if (ch === '\\' && s[k + 1] === '|') { cur += '|'; k++; continue; }
+    if (ch === '`') inCode = !inCode;
+    if (ch === '|' && !inCode) { cells.push(cur.trim()); cur = ''; continue; }
+    cur += ch;
+  }
+  cells.push(cur.trim());
+  return cells;
+}
+
+const TABLE_ROW = /^\s*\|/;
+const TABLE_SEP = /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)*\|?\s*$/;
+
+function table(headRow, bodyRows) {
+  const head = tableCells(headRow).map((c) => `<th>${inline(c)}</th>`).join('');
+  const body = bodyRows.map((r) => `<tr>${tableCells(r).map((c) => `<td>${inline(c)}</td>`).join('')}</tr>`).join('');
+  return `<div class="table-wrap"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
+}
+
 export function renderMarkdown(src) {
   const lines = src
     .replace(/\r\n?/g, '\n')
@@ -78,6 +103,15 @@ export function renderMarkdown(src) {
     }
     if (/^(-{3,}|\*{3,})\s*$/.test(line)) { out.push('<hr>'); i++; continue; }
 
+    if (TABLE_ROW.test(line) && TABLE_SEP.test(lines[i + 1] || '')) {   // table
+      const head = line;
+      i += 2;
+      const rows = [];
+      while (i < lines.length && TABLE_ROW.test(lines[i])) rows.push(lines[i++]);
+      out.push(table(head, rows));
+      continue;
+    }
+
     if (/^>\s?/.test(line)) {
       const buf = [];
       while (i < lines.length && /^>\s?/.test(lines[i])) buf.push(lines[i++].replace(/^>\s?/, ''));
@@ -97,7 +131,7 @@ export function renderMarkdown(src) {
 
     const buf = [];
     while (i < lines.length && lines[i].trim() !== '' &&
-           !/^(```|#{1,4}\s|>|\s*[-*+]\s|\s*\d+[.)]\s|-{3,}\s*$)/.test(lines[i])) {
+           !/^(```|#{1,4}\s|>|\s*\||\s*[-*+]\s|\s*\d+[.)]\s|-{3,}\s*$)/.test(lines[i])) {
       buf.push(lines[i++]);
     }
     if (!buf.length) buf.push(lines[i++]);

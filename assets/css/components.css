@@ -154,6 +154,18 @@ a.card:hover .card__cta { text-decoration: underline; }
   border-left: 4px solid var(--tone-lav); background: var(--surface-2);
   padding: 10px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
+/* Tables: scroll sideways on narrow screens instead of breaking the layout */
+.table-wrap {
+  overflow-x: auto; margin: 14px 0;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+}
+.article__body table { border-collapse: collapse; width: 100%; font-size: 15px; }
+.article__body th, .article__body td {
+  padding: 9px 14px; text-align: left; vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+.article__body th { background: var(--surface-2); color: var(--heading); font-weight: 700; white-space: nowrap; }
+.article__body tbody tr:last-child td { border-bottom: 0; }
 .article__body hr { border: 0; border-top: 1px solid var(--border); margin: 24px 0; }
 
 pre {

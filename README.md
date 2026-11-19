@@ -78,7 +78,7 @@ Screenshots: store them in `img/<slug>/` and use them with `![description](img/<
 
 ### Markdown syntax supported in writeups
 
-`#`, `##`, `###`, `####` headings (each level has its own color: `--md-h1` … `--md-h4` in `tokens.css`), `**bold**`, `*italic*`, `` `command` ``, fenced ```` ``` ```` code blocks (lines starting with `#` are highlighted as comments), `-` / `1.` lists, `>` quotes, `[link](https://…)`, `![image](path)`, and `==flag==` to highlight a flag. HTML comments `<!-- … -->` are hidden.
+`#`, `##`, `###`, `####` headings (each level has its own color: `--md-h1` … `--md-h4` in `tokens.css`), `**bold**`, `*italic*`, `` `command` ``, fenced ```` ``` ```` code blocks (lines starting with `#` are highlighted as comments), `-` / `1.` lists, `>` quotes, `| tables |` (header row + `|---|` separator; they scroll sideways on mobile), `[link](https://…)`, `![image](path)`, and `==flag==` to highlight a flag. HTML comments `<!-- … -->` are hidden.
 
 ## Git workflow
 
